@@ -1,0 +1,4 @@
+CREATE SCHEMA staging;
+CREATE SCHEMA core;
+CREATE SCHEMA reference;
+CREATE SCHEMA analytics;
