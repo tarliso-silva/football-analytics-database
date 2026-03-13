@@ -10,8 +10,8 @@ time TEXT,
 home TEXT,
 away TEXT,
 
-hg INTEGER,
-ag INTEGER,
+hg NUMERIC,
+ag NUMERIC,
 res TEXT,
 
 psch NUMERIC,
