@@ -23,3 +23,20 @@ FROM staging.football_data_matches s
 
 JOIN core.country c
     ON c.country_name = s.country;
+
+
+
+-- ---------------------------------------------------------
+-- LOAD SEASON DIMENSION
+-- ---------------------------------------------------------
+
+INSERT INTO core.season (competition_id, season_year)
+
+SELECT DISTINCT
+    c.competition_id,
+    s.season::INTEGER
+
+FROM staging.football_data_matches s
+
+JOIN core.competition c
+    ON c.competition_name = s.league;
