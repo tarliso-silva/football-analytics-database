@@ -29,7 +29,7 @@ df = pd.read_csv(DATASET_PATH)
 # ------------------------------------------------------------
 
 # converte NaN do pandas para None (NULL no PostgreSQL)
-df = df.where(pd.notnull(df), None)
+df = df.astype(object).where(pd.notnull(df), None)
 
 print(f"Linhas encontradas no CSV: {len(df)}")
 

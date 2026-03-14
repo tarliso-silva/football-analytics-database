@@ -56,3 +56,39 @@ UNION
 
 SELECT DISTINCT away
 FROM staging.football_data_matches;
+
+
+
+-- ---------------------------------------------------------
+-- LOAD MATCH FACT TABLE
+-- ---------------------------------------------------------
+
+INSERT INTO core.match (
+    season_id,
+    match_date,
+    match_time,
+    home_team_id,
+    away_team_id,
+    home_goals,
+    away_goals
+)
+
+SELECT
+    s2.season_id,
+    TO_DATE(s.date, 'DD/MM/YYYY'),
+    s.time::TIME,
+    ht.team_id,
+    at.team_id,
+    s.hg::INTEGER,
+    s.ag::INTEGER
+
+FROM staging.football_data_matches s
+
+JOIN core.season s2
+    ON s2.season_year = s.season::INTEGER
+
+JOIN core.team ht
+    ON ht.team_name = s.home
+
+JOIN core.team at
+    ON at.team_name = s.away;
