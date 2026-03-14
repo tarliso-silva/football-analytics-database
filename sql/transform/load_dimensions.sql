@@ -40,3 +40,19 @@ FROM staging.football_data_matches s
 
 JOIN core.competition c
     ON c.competition_name = s.league;
+
+
+
+-- ---------------------------------------------------------
+-- LOAD TEAM DIMENSION
+-- ---------------------------------------------------------
+
+INSERT INTO core.team (team_name)
+
+SELECT DISTINCT home
+FROM staging.football_data_matches
+
+UNION
+
+SELECT DISTINCT away
+FROM staging.football_data_matches;
